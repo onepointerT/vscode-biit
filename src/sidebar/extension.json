@@ -1,0 +1,46 @@
+{
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "issues-milestones",
+          "title": "Issues & Milestones",
+          "icon": "resources/biit-im.svg"
+        }
+      ],
+      "panel": [
+        {
+          "id": "bookmarks",
+          "title": "Bookmarks",
+          "icon": "resources/biit-bm.svg"
+        }
+      ]
+    },
+    "views": {
+      "issues-milestones": [
+        {
+          "id": "issues",
+          "name": "Issues & Evolvement"
+        },
+        {
+          "id": "milestones",
+          "name": "Milestones & Outline"
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "bookmarks",
+          "name": "Bookmarks"
+        },
+        {
+          "id": "bm-toc-file",
+          "name": "Bookmarks File"
+        },
+        {
+          "id": "bm-toc-overall",
+          "name": "Bookmarks Project"
+        }
+      ]
+    }
+  }
+}

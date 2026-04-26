@@ -1,0 +1,47 @@
+{
+  "name": "vscode-biit",
+  "version": "0.0.1",
+  "description": "An bookmark and issue tracking system with Milestones for VSCode",
+  "main": "biit.ts",
+  "scripts": {
+    "test": "test.js"
+  },
+  "keywords": [
+    "Issues",
+    "Milestones",
+    "Bookmarks",
+    "VSCode"
+  ],
+  "author": "OnePointer UG Authors",
+  "license": "ISC/AFL",
+  "publisher": "OnePointer UG",
+  "engines": {
+    "vscode": "^1.105.0",
+    "node": "^21.0.5"
+  },
+  "pricing": "Free",
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "vscode": "^1.1.37",
+    "vscode-markdown-languageservice": "^0.5.0-alpha.12"
+  },
+  "displayName": "Bookmarking Issues & Issue Tracking",
+  "preview": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onepointerT/vscode-biit.git"
+  },
+  "markdown": "github",
+  "icon": "resources/biit.png",
+  "categories": [
+    "Other",
+    "Data Science",
+    "Programming Languages"
+  ],
+  "dependencies": {
+    "vscode": "^1.1.37"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "scm",
+        "contents": "In order to use bookmarks and issue/milestone tracking, choose a project name and a storage place (defaults to '.vscode/biit.db')",
+        "when": "config.storage.path.empty() || config.project.name.empty()"
+      }
+    ]
+  }
+}
