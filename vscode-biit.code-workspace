@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"js/ts.tsdk.path": "node_modules\\typescript\\lib",
+		"python.analysis.extraPaths": [
+			"c:\\Users\\sebas\\.vscode\\extensions\\ms-security.ms-sentinel-2.1.0\\python"
+		]
+	}
+}
