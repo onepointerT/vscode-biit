@@ -42,7 +42,14 @@
     "Programming Languages"
   ],
   "dependencies": {
+    "@keyv/sqlite": "^4.0.8",
+    "await-sleep": "^0.0.1",
     "fs": "^0.0.1-security",
+    "sleep": "^6.3.0",
+    "sleep-async": "^1.0.5",
+    "sqlite": "^5.1.1",
+    "sqlite-level": "^1.2.1",
+    "sqlite-vec": "^0.1.9",
     "uuid": "^14.0.0",
     "vscode": "^1.1.37"
   }
