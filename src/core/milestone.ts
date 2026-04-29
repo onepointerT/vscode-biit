@@ -1,22 +1,73 @@
-import { DBID, DBIDObject } from "./database/dbid";
+import { DBCallbacks } from "./database/dbcallbackfactory";
+import { DBEntry } from "./database/dbentry";
+import { DBID } from "./database/dbid";
+import type { DBOject } from "./database/dbobject";
 import { Issue } from "./issue";
 
-export class Milestone implements DBIDObject {
+export class Milestone implements DBOject<Milestone> {
     id : DBID;
-    name : string;
+    tag : string;
+    headline : string;
     description : string;
 
     active : Array<Issue>;
     open : Array<Issue>;
     closed : Array<Issue>;
 
-    constructor(name : string, description : string) {
+    constructor() {
         this.id = new DBID();
-        this.name = name;
-        this.description = description;
+        this.tag = "";
+        this.headline = "";
+        this.description = "";
         this.active = new Array<Issue>();
         this.open = new Array<Issue>();
         this.closed = new Array<Issue>();
+    }
+    newInstanceFromObj(obj: object): Milestone {
+        return Milestone.newInstanceFromObj(obj);
+    }
+    newInstance(dbentry: DBEntry): Milestone {
+        return Milestone.newInstance(dbentry);
+    }
+
+    public static newInstanceFromObj(obj: object): Milestone {
+        let dbentry = DBEntry.fromObject(obj);
+        return Milestone.newInstance(dbentry);
+    }
+
+    public static newInstance(dbentry: DBEntry): Milestone {
+        var tag, headline, description, active, open, closed, dbid;
+        
+        tag = dbentry.getValue("tag");
+        headline = dbentry.getValue("headline");
+        description = dbentry.getValue("description");
+        active = dbentry.getValue("active");
+        open = dbentry.getValue("open");
+        closed = dbentry.getValue("closed")
+        dbid = dbentry.getValue("id");
+
+        let milestone = new Milestone();
+        milestone.tag = tag;
+        milestone.headline = headline;
+        milestone.description = description;
+        DBCallbacks.findReferences(active, "issue").forEach((value, index, array) => {
+            let issue : Issue = Issue.newInstanceFromObject(value);
+            milestone.active.push(issue);
+
+        });
+        DBCallbacks.findReferences(open, "issue").forEach((value, index, array) => {
+            let issue : Issue = Issue.newInstanceFromObject(value);
+            milestone.open.push(issue);
+
+        });
+        DBCallbacks.findReferences(closed, "issue").forEach((value, index, array) => {
+            let issue : Issue = Issue.newInstanceFromObject(value);
+            milestone.closed.push(issue);
+
+        });
+        milestone.id = new DBID(dbid);
+
+        return milestone;
     }
 
     public findByID(issueID : string) {

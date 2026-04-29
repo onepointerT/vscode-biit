@@ -1,8 +1,11 @@
 import { Event, TreeItem, TreeViewExpansionEvent, TreeViewSelectionChangeEvent, TreeViewVisibilityChangeEvent } from "vscode";
+import type { DBEntry } from "./database/dbentry";
 
 
 export abstract class VSCodeTreeItem<T> extends HTMLElement {
-    constructor() {
+    
+
+    constructor(dbentry: DBEntry) {
         super();
     }
 

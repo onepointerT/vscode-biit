@@ -1,5 +1,6 @@
 CREATE TABLE "bookmarks" (
     id VARCHAR(50) PRIMARY KEY,
+    tag VARCHAR(56) NOT NULL,
     file VARCHAR(128) NOT NULL,
     line NUMBER NOT NULL,
     column NUMBER NOT NULL,
@@ -11,6 +12,7 @@ CREATE TABLE "bookmarks" (
 
 CREATE TABLE "issues" (
     id VARCHAR(50) PRIMARY KEY,
+    tag VARCHAR(56) NOT NULL,
     headline VARCHAR(96) NOT NULL,
     short_descr VARCHAR(312) NOT NULL,
     description VARCHAR(1024)

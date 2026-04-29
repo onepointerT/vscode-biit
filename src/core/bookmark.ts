@@ -5,12 +5,14 @@ import { VSCodeTable } from "./widgets/vscodetable";
 import { Event, TreeItem, TreeItemCollapsibleState, TreeViewExpansionEvent, TreeViewSelectionChangeEvent, type TreeView } from "vscode";
 import { StrTemplate } from "../util/str_template";
 import type { Issue } from "./issue";
+import type { DBOject } from "./database/dbobject";
+import { DBEntry } from "./database/dbentry";
 
 
 
 
-export class Bookmark extends VSCodeTreeItem<Bookmark> {
-    elemID : DBID;
+export class Bookmark extends VSCodeTreeItem<Bookmark> implements DBOject<Bookmark> {
+    id : DBID;
     tag : string;
     headline : string;
     short_descr : string;
@@ -22,12 +24,40 @@ export class Bookmark extends VSCodeTreeItem<Bookmark> {
                , dbid = v4()
     ) {
         super();
-        this.elemID = new DBID(dbid);
+        this.id = new DBID(dbid);
         this.tag = tag;
         this.headline = headline;
         this.short_descr = short_descr;
         this.src_location = new SourceLocation(filepath, line, column);
+        this.issues = new Array<Issue>();
     }
+    newInstanceFromObj(obj: object): Bookmark {
+        return Bookmark.newInstanceFromObject(obj);
+    }
+    newInstance(dbentry: DBEntry): Bookmark {
+        return Bookmark.newInstance(dbentry);
+    }
+
+    public static newInstance(dbentry: DBEntry) : Bookmark {
+        var tag, headline, short_descr, file, line, column, dbid;
+        
+        tag = dbentry.getValue("tag");
+        headline = dbentry.getValue("headline");
+        short_descr = dbentry.getValue("short_descr");
+        file = dbentry.getValue("file");
+        line = dbentry.getValue("line");
+        column = dbentry.getValue("column");
+        dbid = dbentry.getValue("id");
+
+        return new Bookmark(tag, headline, short_descr, file, Number.parseInt(line), Number.parseInt(column), dbid);
+    }
+
+    public static newInstanceFromObject(obj: object) : Bookmark {
+        let dbentry = DBEntry.fromObject(obj);
+
+        return Bookmark.newInstance(dbentry);
+    }
+    
 
     public get() : object {
         return {

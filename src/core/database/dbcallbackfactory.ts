@@ -43,10 +43,29 @@ export class DBCallbacks {
         return n;
     }
 
-    public static async exec(stmt : string, _cbfn: (dataset: DBDataSet, attributes: object) => DBDataSet = (dataset: DBDataSet) => { return dataset;}, attributes: object ) : Promise<Object> {
+    public static dbEntryToObject(dataset: DBDataSet, attributes: object) : object {
+        let dbentry : DBEntry = dataset[0];
+        let dbo = dbentry.toObject();
+        Object.assign(dbo, attributes);
+        return dbo;
+    }
+
+    public static async execOnce(stmt : string, attributes: object, _cbfn: (dataset: DBDataSet, attributes: object) => (DBDataSet | object) = DBCallbacks.dbEntryToObject ) : Promise<DBDataSet | object> {
         let qry = DBCallbacks.pushqry(stmt);
         while ( DBCallbacks.query != qry ) { /* async suspend here */ }
         while ( DBCallbacks.result == undefined ) { /* async suspend here */ }
         return _cbfn(DBCallbacks.result, attributes);
+    }
+
+    public static dataSetToObject(dataset: DBDataSet, attributes: object) : object {
+        /* TODO */
+    }
+
+    public static entryToObject(dbentry: DBEntry, attributes: object) : object {
+        /* TODO */
+    }
+
+    public static findReferences(dbref_values: string, dbref_type: string) : Array<object> {
+        /* TOI */
     }
 }

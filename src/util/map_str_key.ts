@@ -11,8 +11,8 @@ export class MapStrKey<T> extends Map<string, T> {
         else this.set(k, val);
     }
     
-    public getValue(k: string) : T | null {
-        let result = null;
+    public getValue(k: string) : T | string {
+        let result = "";
 
         for (const elem in this.entries()) {
             if ( elem[0].localeCompare(k) == 0 ) { result = elem[1]; break; }
