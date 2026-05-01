@@ -6,6 +6,8 @@ import type { DBID } from "./dbid";
 export interface DBOject<T> {
     id: DBID;
 
+    lookup() : DBEntry;
+
     newInstanceFromObj(obj: object) : T;
     newInstance(dbentry: DBEntry) : T;
 

@@ -59,19 +59,35 @@ export class DBRelationView<T extends DBOject<T>> extends DBRelation implements 
     trItem: TreeItem;
     md: MarkdownString
     
-
     constructor(relation_id_list : string, relationalTable : string) {
         super(relation_id_list, relationalTable);
         this.id = new DBID();
+        
         this.obj = this.fromDBEntry()
         this.trItem = this.makeTreeItem(this.obj);
         this.md = this.asMarkdown(this.obj);
     }
-    fromDBEntry(dbe: DBEntry): T {
+    viewable: T;
+    newInstanceFromObj(obj: object): DBView<T> {
         throw new Error("Method not implemented.");
     }
-    makeTreeItem(viewtype: T): TreeItem {
+    newInstance(dbentry: DBEntry): DBView<T> {
         throw new Error("Method not implemented.");
+    }
+    toHTML(obj: object): HTMLElement {
+        throw new Error("Method not implemented.");
+    }
+    toMarkdown(obj: object): MarkdownString {
+        throw new Error("Method not implemented.");
+    }
+    lookup(): DBEntry {
+        throw new Error("Method not implemented.");
+    }
+    fromDBEntry(dbe: DBEntry): T {
+        return T.newInstance(dbe); /* TOI in typescript */
+    }
+    makeTreeItem(viewtype: T): TreeItem {
+        /* TOI in typescript 
     }
     asMarkdown(viewtype: T): MarkdownString {
         throw new Error("Method not implemented.");
